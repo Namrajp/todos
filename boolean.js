@@ -1,12 +1,16 @@
 // Boolean
-// Our objects should store array data as objects
+// Boolean
+// Our objects should store data as objects inside an array
 var todoList = {
   todos: [],
-  displayTodos: function () {
-   console.log("My todos:",this.todos);
+  displayTodos: function(){
+    console.log("My todos:",this.todos);
   },
-  // add todo method adds an object with todoText and boolean val
-  addTodos: function (todoText) {
+
+  // add todo method adds objects,this method pushes a string 
+  //text and a boolean value that tracks completion of todo task.
+
+  addTodos: function(todoText){
     this.todos.push({
       todoText: todoText,
       completed: false
@@ -29,10 +33,3 @@ var todoList = {
   }
  
 }
-
-// Version 4 - Booleans
-// • Requirements
-// • todoList.addTodo should add objects
-// • todoList.changeTodos should change the todoText property
-// • todoList.toggleCompleted should flip the completed property
-// • Review
