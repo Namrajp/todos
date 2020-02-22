@@ -79,6 +79,19 @@ var handlers = {
   addTodos: function(){
     var addTodoTextInput = document.getElementById('addTodoTextInput');
     todoList.addTodos(addTodoTextInput.value);
+    addTodoTextInput.value = "";
+  },
+  changeTodos: function(){
+    var changeTodosPositionInput = document.getElementById('changeTodosPositionInput');
+    var changeTodosTextInput = document.getElementById("changeTodosTextInput");
+    todoList.changeTodos(changeTodosPositionInput.valueAsNumber,changeTodosTextInput.value);
+    changeTodosPositionInput.value = "";
+    changeTodosTextInput.value = '';
+  },
+  deleteTodos: function(){
+        var deleteTodosPositionInput = document.getElementById('deleteTodosPositionInput');
+        todoList.deleteTodos(deleteTodosPositionInput.valueAsNumber);
+        changeTodosPositionInput.value = '';
   }
 
 }
