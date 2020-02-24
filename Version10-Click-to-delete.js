@@ -1,3 +1,13 @@
+// Version 10- Click to delete
+// •	The ‘return’ statement
+// •	Requirements
+// •	There should be a way to create delete buttons
+// •	There should be a delete buttons for each todo
+// •	Each li should have a id that has the todo position
+// •	Delete buttons should have access to the todo id
+// •	Clicking delete should update todoList.todos and the DOM
+// •	Cleanup and Review
+
 var todoList = {
   todos: [], 
   // add todo method adds an object with todoText and boolean val
@@ -59,10 +69,8 @@ var handlers = {
     changeTodosTextInput.value = '';
     view.displayTodos();
   },
-  deleteTodos: function(){
-        var deleteTodosPositionInput = document.getElementById('deleteTodosPositionInput');
-        todoList.deleteTodos(deleteTodosPositionInput.valueAsNumber);
-        changeTodosPositionInput.value = '';
+  deleteTodos: function(position){
+        todoList.deleteTodos(position);
         view.displayTodos();
   },
   toggleAll: function(){
@@ -102,32 +110,31 @@ var view = {
 			}
 // Inserting li elements into the DOM
 			var todoLi = document.createElement('li');
+      todoLi.id = i;
 			todoLi.textContent = todoTextWithCompletion;
 			todoLi.appendChild(this.createDeleteButton() );
 			todoUl.appendChild(todoLi);
 		}
 		
 		},
-// creting delete button for every todo and return to this.displayTodos()
 		createDeleteButton: function() {
 			var deleteButton = document.createElement('button');
 			deleteButton.textContent = 'Delete';
 			deleteButton.className = 'deleteButton';
 			return deleteButton;
+	},
+  //declaring eventListener on Ul instead of each li saves from
+  //memory related issues bacause there is a lot of eventListeners
 
-
-	}
+    logEvents: function(){
+      var todoUl = document.querySelector('ul');
+      todoUl.addEventListener('click',function(event){
+      //console.log(event.target.parentNode.id);id which is a string value
+      handlers.deleteTodos(parseInt(event.target.parentNode.id) );
+    })
+  }
 };
-
-// Version 9
-// Escape from the console
-// •	Requirements
-// •	Inserting li elements into the DOM
-// •	There should be an li element for every todo
-// •	Each li element should contain .todoText
-// •	Each li element should show .completed
-// •	Escaping the console
-// •	Review
+view.logEvents();
 
 
 
