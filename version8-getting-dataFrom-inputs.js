@@ -1,26 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Version 8 Getting input data from page using handlers.methods() to render data. </title>
+</head>
+<body>
+<!--   Requirements Version 7: 
+1.There should be a "Display todos" and a "Toggle all" button in the app
+2. Clicking 'Display todos' should run todoList.displayTodos
+3. Clicking 'Toggle all' should run todoList.toggleAll
+ -->  <button onclick="handlers.toggleAll()">Toggle All</button>
+  <button onclick="handlers.displayTodos()">Display All</button>
+  <div>
+    <button onclick="handlers.addTodos()">Add</button>
+    <input type="text" id="addTodosButtonsInput">
+  </div>
+
+  <div>
+    <button onclick="handlers.changeTodos()">Change</button>
+    <input type="number" id="changeTodosPositionInput">
+    <input type="text" id="changeTodosTextInput">
+  </div>
+
+  <div>
+    <button onclick="handlers.deleteTodos()">Delete</button>
+    <input type="number" id= 'deleteTodosPositionInput'>
+  </div>
+
+  <div>
+    <button onclick="handlers.toggleCompleted()">toggle Completed</button>
+    <input type="number" id= 'toggleTodosPositionInput'>
+  </div>
+<script>
 var todoList = {
   todos: [],
-  displayTodos: function() {
-    if(this.todos.length === 0){
-      console.log("The array is empty.Please add some todo!!")
-    }
-    else{
-      console.log("My todos:");
-      for(var i = 0; i < this.todos.length; i++){
-        if(this.todos[i].completed === false){
-          console.log("()",this.todos[i].todoText);
-        }  
-        else
-        {
-         console.log("(*)",this.todos[i].todoText); 
+  displayTodos: function () {
+     if(this.todos.length === 0){
+      console.log("Your Todo list is empty!");
+      } else {
+        console.log("My Todos:");
+        for (var i=0; i < this.todos.length; i++) {
+           if (this.todos[i].completed === true){
+             console.log("(x)",this.todos[i].todoText);
+          } else {
+           console.log("()",this.todos[i].todoText);
+          }
         }
       }
-    }
-     
-   }, 
-    
-  // add todo method adds an object with todoText and boolean val
-  addTodos: function (todoText) {
+    },
+  addTodos: function(todoText) {
     this.todos.push({
       todoText: todoText,
       completed: false
@@ -41,67 +69,65 @@ var todoList = {
     todo.completed = !todo.completed;
     this.displayTodos();
   },
-  toggleAll: function(){
-    var totalCompleted = 0;
-    for(var i=0; i < this.todos.length; i++)
-    {
-      if(this.todos[i].completed === true)
-      {
-        totalCompleted++;
+  toggleAll: function() {
+       var totalTodos = this.todos.length;
+       var completedTodos = 0;
+     
+     // Get number of completedTodos 
+      for (var i=0; i< totalTodos; i++) {
+        if (this.todos[i].completed === true){
+          completedTodos++;
+        }
       }
+      
+     // Case 1: If everything's true, make everything false
+     if (completedTodos === totalTodos){
+       for (var i=0; i< totalTodos; i++){
+         this.todos[i].completed = false;
+       }
     }
-    //if everything is true make everything false
-    if(totalCompleted === this.todos.length){
-      for(var i=0; i < this.todos.length; i++){
-        this.todos[i].completed = false;
-        this.displayTodos();
-      } 
-    }
-    else
-      for(var i=0; i < this.todos.length; i++){
+    // Case 2: Otherwise, make everything true
+    else {
+      for (var i=0; i< totalTodos; i++) {
         this.todos[i].completed = true;
-        this.displayTodos();
-      }
-    // else make everything true
+      }     
+   }
+    this.displayTodos();
   }
-}
+};  
+ //We create handler to optimize the use of document.getElementById
+  //and remove the necessacity of using html button id, addEventListener('click', function(){}
+  var handlers = {
+    displayTodos: function() {
+      todoList.displayTodos();
+    },
 
+    addTodos: function(){
+      var addTodosButtonsInput = document.getElementById('addTodosButtonsInput');
+            todoList.addTodos(addTodosButtonsInput.value);
+            addTodosButtonsInput.value = '';
 
+    },
+    changeTodos: function(){
+      changeTodosPositionInput = document.getElementById('changeTodosPositionInput');
+      changeTodosTextInput = document.getElementById('changeTodosTextInput');
+      todoList.changeTodos(changeTodosPositionInput.valueAsNumber,changeTodosTextInput.value);
+      changeTodosPositionInput.value = '';
+      changeTodosTextInput.value = '';
+    }, 
+    deleteTodos: function(){
+      deleteTodosPositionInput = document.getElementById('deleteTodosPositionInput');
+      todoList.deleteTodos(deleteTodosPositionInput.valueAsNumber);
+    },
+    toggleCompleted: function(){
+      toggleTodosPositionInput = document.getElementById('toggleTodosPositionInput');
+      todoList.toggleCompleted(toggleTodosPositionInput.valueAsNumber);
+    },
+    toggleAll: function(){
+      todoList.toggleAll();
+    }
+  };
 
-//Refactoring buttons using a object called noname
-var handlers = {
-  displayTodos: function(){
-    todoList.displayTodos();
-  },
-  addTodos: function(){
-    var addTodoTextInput = document.getElementById('addTodoTextInput');
-    todoList.addTodos(addTodoTextInput.value);
-    addTodoTextInput.value = "";
-  },
-  changeTodos: function(){
-    var changeTodosPositionInput = document.getElementById('changeTodosPositionInput');
-    var changeTodosTextInput = document.getElementById("changeTodosTextInput");
-    todoList.changeTodos(changeTodosPositionInput.valueAsNumber,changeTodosTextInput.value);
-    changeTodosPositionInput.value = "";
-    changeTodosTextInput.value = '';
-  },
-  deleteTodos: function(){
-        var deleteTodosPositionInput = document.getElementById('deleteTodosPositionInput');
-        todoList.deleteTodos(deleteTodosPositionInput.valueAsNumber);
-        changeTodosPositionInput.value = '';
-  },
-  toggleAll: function(){
-    todoList.toggleAll();
-  }
-
-}
-// Version 7 - Html and DOM
-// • Requirements
-// • Html essentials
-// • What is DOM
-// • There should be a “Display todos “ button and a “Toggle all” buttons in the app
-// • Clicking “Display todos” should run todoList.display Todos
-// • Clicking “Toggle all” should run todosList.toggleAll
-// • Review
-
-
+    </script>
+  </body>
+</html>
