@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Buttons Test</title>
+</head>
+<body>
+  <button onclick="handlers.toggleAll()">Toggle All</button>
+  <div>
+    <button onclick="handlers.addTodos()">Add</button>
+    <input type="text" id="addTodosButtonsInput">
+  </div>
+
+  <div>
+    <button onclick="handlers.changeTodos()">Change</button>
+    <input type="number" id="changeTodosPositionInput">
+    <input type="text" id="changeTodosTextInput">
+  </div>
+
+
+  <div>
+    <button onclick="handlers.toggleCompleted()">Toggle item</button>
+    <input type="number" id="toggleTodosPositionInput">
+  </div>
+
+  <ul></ul>
+
+<script>
+
+var todoList = {
+  todos: [],
+// Requirement: 
+  // todoList.toggleAll should use forEach
+  // todoList.displayTodos should use forEach
+  
+  addTodos: function(todoText) {
+    this.todos.push({
+      todoText: todoText,
+      completed: false
+    });
+  },
+  // change todos of todoText
+  changeTodos: function(position,newTodo) {
+    this.todos[position].todoText = newTodo;
+  },
+  deleteTodos: function(position) {
+    this.todos.splice(position,1);
+  },
+  toggleCompleted: function(position) {
+    var todo = this.todos[position];
+    todo.completed = !todo.completed;
+  },
+  
+  toggleAll: function() {
+       var totalTodos = this.todos.length;
+       var completedTodos = 0;
+   
+      this.todos.forEach(function(todo) {
+        if(todo.completed === true) {
+          completedTodos++;
+        }
+      });
+      
+     // Case 1: If everything's true, make everything false
+     if (completedTodos === totalTodos){
+         this.todos.forEach(function(todo) {
+          todo.completed = false;
+       })
+    }
+    // Case 2: Otherwise, make everything true
+    else {
+      this.todos.forEach(function(todo) {
+          todo.completed = true;
+      })    
+   }
+  }
+}; 
+
+var handlers = {
+    displayTodos: function() {
+      todoList.displayTodos();
+    },
+
+    addTodos: function(){
+      var addTodosButtonsInput = document.getElementById('addTodosButtonsInput');
+            todoList.addTodos(addTodosButtonsInput.value);
+            addTodosButtonsInput.value = '';
+            view.displayTodos();
+    },
+    changeTodos: function(){
+      changeTodosPositionInput = document.getElementById('changeTodosPositionInput');
+      changeTodosTextInput = document.getElementById('changeTodosTextInput');
+      todoList.changeTodos(changeTodosPositionInput.valueAsNumber,changeTodosTextInput.value);
+      changeTodosPositionInput.value = '';
+      changeTodosTextInput.value = '';
+      view.displayTodos();
+    }, 
+    deleteTodos: function(position){
+      todoList.deleteTodos(position);
+      view.displayTodos();
+    },
+    toggleCompleted: function(){
+      toggleTodosPositionInput = document.getElementById('toggleTodosPositionInput');
+      todoList.toggleCompleted(toggleTodosPositionInput.valueAsNumber);
+      toggleTodosPositionInput.value = '';
+      view.displayTodos();
+    },
+    toggleAll: function(){
+      todoList.toggleAll();
+      view.displayTodos();
+    }
+  };
+
+  var view = {
+    displayTodos: function(){
+      var todoUl = document.querySelector('ul');
+      todoUl.innerHTML = '';
+
+      var todoTextWithCompletion = '';
+
+      // this // refers to the view object if we uncomment and write only this;
+      // forEach(callback, this) this is passed to callback function is same as this inside method
+      // displayTodos on line 120 above inside view object.
+
+      todoList.todos.forEach(function(todo,position) {
+        if (todo.completed === true){
+          todoTextWithCompletion = "( x )" + todo.todoText;
+        } else {
+          todoTextWithCompletion = "( )" + todo.todoText;
+        }
+
+        var todoLi = document.createElement('li');
+        todoLi.id = position;
+        todoLi.textContent = todoTextWithCompletion;
+        todoLi.appendChild(this.createDeleteButton() );
+        todoUl.appendChild(todoLi);
+      }, this) // this used as 2nd argument of forEach first being callback, comment relates to comment on line 122. so, inside call back this ie this.createDeleteButton() is equals to this inside forEach(calback,this). https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach 
+    },
+      createDeleteButton: function(){
+        var deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete Button'
+        deleteButton.className = "deleteButton";
+        return deleteButton;
+      },
+      setUpEventListeners: function() { 
+        var todoUL = document.querySelector('ul'); // // This pattern is known as event delegation.
+
+        todoUL.addEventListener('click',function(event){
+        var elementClicked = event.target;    //Get the element that was clicked on
+        if (elementClicked.className === 'deleteButton'){ // Check if elementClicked is a delete button //Run handlers.deleteTodo(position) // parseInt converts string id to number
+
+        handlers.deleteTodos(parseInt(elementClicked.parentNode.id) ) ; 
+        view.displayTodos();
+      }
+    })
+  }
+};
+
+view.setUpEventListeners(); // we have to call event to click and delete todo list
+
+    </script>
+  </body>
+</html>
