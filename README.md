@@ -6,28 +6,28 @@
 shoud use functions 
 ## Version 3 
 has objects that organize functions and array into a single block
-
+---
 ## Version 4 - Booleans
-###Requirements
+### Requirements
 * todoList.addTodo should add objects
 * todoList.changeTodos should change the todoText property
 * todoList.toggleCompleted should flip the completed property
 * Review
 
 ## Version 5 - Loops of Logic
-###The for loop
+### The for loop
 *	Looping over arrays
 *	Requirements
 *	displayTodos should show todoText
 *	displayTodos should tell you if todos is empty
 *	displayTodos should show completed 
-
+---
 ## Version 6 - Thinking in Code
 *	Requirements
 *	toggleAll: if everything is true,make everything false
 *	toggleAll: Otherwise make everything true
 *	Review
-
+---
 ## Version 7 - Html and DOM
 *	Requirements
 *	Html essentials
@@ -36,19 +36,19 @@ has objects that organize functions and array into a single block
 *	Clicking “Display todos” should run todoList.display Todos
 *	Clicking “Toggle all” should run todosList.toggleAll
 *	Review
-
+---
 ## Version 8- Getting data from input 
 
-*Out first refactoring - More on refactoring -Requirements 
+* Out first refactoring - More on refactoring -Requirements 
 
-*There should be a button for adding todos 
+* There should be a button for adding todos 
 
-*There should be a button for changing todos 
+* There should be a button for changing todos 
 
-*There should be a button for deleting todos 
+* There should be a button for deleting todos 
 
-*There should be a button for toggling a todo 
-
+* There should be a button for toggling a todo 
+---
 ## Escape from the console 
 
 * Requirements 
@@ -60,61 +60,59 @@ has objects that organize functions and array into a single block
 * Each li element should contain .todoText 
 
 * Each li element should show .completed 
-
+---
 ## Escaping the console 
 
-*Review - Interlude-Functions inside of functions 
+* Review - Interlude-Functions inside of functions 
 
-*runWithDebugger 
+* runWithDebugger 
 
-*setTimeout 
+* setTimeout 
 
-*forEach 
+* forEach 
 
-*addEventListener 
+* addEventListener 
 
-*Buzzwords: Higher order functions and callback functions 
-
+* Buzzwords: Higher order functions and callback functions 
+---
 ## Version 10- Click to delete 
 
-*The ‘return’ statement 
+* The ‘return’ statement 
 
-*Requirements 
+* Requirements 
 
-*There should be a way to create delete buttons 
+* There should be a way to create delete buttons 
 
-*There should be a delete buttons for each todo 
+* There should be a delete buttons for each todo 
 
-*Each li should have a id that has the todo position 
+* Each li should have a id that has the todo position 
 
-*Delete buttons should have access to the todo id 
+* Delete buttons should have access to the todo id 
 
-*Clicking delete should update todoList.todos and the DOM 
+* Clicking delete should update todoList.todos and the DOM 
 
-*Cleanup and Review 
-
- 
-
+* Cleanup and Review 
+---
 ## Version 11 – Destroy all for loops 
 
-*Requirements 
+* Requirements 
 
-*todoList.toggleAll should use forEach 
+* todoList.toggleAll should use forEach 
 
-*view.displayTodos should use forEach 
+* view.displayTodos should use forEach 
 
-*Review 
+* Review 
 
-*Interlude- understanding *this* 
-
+* Interlude- understanding *this* 
+---
 ## The cheatsheet 
 
-*Case 1: In a regular function 
+* Case 1: In a regular function 
 
-*Case 2: When a function is called as a method (1:15) 
+* Case 2: When a function is called as a method (1:15) 
 
-*Case 3: When a function is called as a constructor (5:11) 
+* Case 3: When a function is called as a constructor (5:11) 
 
-*Case 4: When you explicitly set the value of  ‘this’ with bind, apply, or call (10:41) 
+* Case 4: When you explicitly set the value of  ‘this’ with bind, apply, or call (10:41) 
 
-*Case 5: when you’re in a callback function 
+* Case 5: when you’re in a callback function 
