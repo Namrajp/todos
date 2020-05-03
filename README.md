@@ -1,17 +1,17 @@
 # Steps to the learn in Essential Javascript
 ## Version 1
- uses just statements
-	declare array todos = ["task 1","task 2","task 3"]; and console.log("My Todos: ",todos)
+Uses just statements
+Declare array todos = ["task 1","task 2","task 3"]; and console.log("My Todos: ",todos)
 ## Version 2 
-shoud use functions 
-## Version 3 
-has objects that organize functions and array into a single block
+Shoud use functions 
+## Version 3
+	Objects organize functions as methods and also condense data in arrays with methods into a single block called object
 ---
 ## Version 4 - Booleans
-### Requirements
-* todoList.addTodo should add objects
-* todoList.changeTodos should change the todoText property
-* todoList.toggleCompleted should flip the completed property
+### Requirements methods to do tasks on the data manipulation
+* todoList.addTodo should add objects or this.addTodos()
+* todoList.changeTodos should change the todoText property or this.method()
+* todoList.toggleCompleted should flip the completed property or this.method()
 * Review
 
 ## Version 5 - Loops of Logic
