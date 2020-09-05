@@ -50,19 +50,16 @@ var todoList = {
       }
     }
     //if everything is true make everything false
-    if(totalCompleted === this.todos.length){
-      for(var i=0; i < this.todos.length; i++){
-        this.todos[i].completed = false;
-      } 
-    }
-    else
-      for(var i=0; i < this.todos.length; i++){
-        this.todos[i].completed = true;
-      }
-    // else make everything true
-  }
- 
-}
+     for(var i=0; i < this.todos.length; i++){
+        if(totalCompleted === this.todos.length){
+            this.todos[i].completed = false;
+        } else {
+            this.todos[i].completed = true;
+        } 
+     }
+ }
+ this.displayTodos(); 
+}  
 // Version 5 - Loops of Logic
 // • The for loop
 // • Looping over arrays
