@@ -5,7 +5,8 @@ Declare array todos = ["task 1","task 2","task 3"]; and console.log("My Todos: "
 ## Version 2 
 Shoud use functions 
 ## Version 3
-	Objects organize functions as methods and also condense data in arrays with methods into a single block called object
+	Objects organize functions as methods and also condense data in arrays with methods into a single block called object -- Plunker https://plnkr.co/ or
+	codepen can be used for online editing.
 ---
 ## Version 4 - Booleans
 ### Requirements methods to do tasks on the data manipulation
